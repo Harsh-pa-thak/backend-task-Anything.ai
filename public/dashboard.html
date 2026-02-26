@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task Manager – Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/style.css" />
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <strong>📋 Task Manager</strong>
+        <div style="display:flex; align-items:center; gap:1rem;">
+            <span id="user-name"></span>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <!-- Create Task -->
+        <div class="create-card">
+            <h2>+ New Task</h2>
+            <div id="create-alert" class="alert"></div>
+            <form onsubmit="handleCreate(event)">
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" id="task-title" placeholder="Task title" required />
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="task-desc" placeholder="Optional description..."></textarea>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <label>Status</label>
+                        <select id="task-status">
+                            <option value="todo">Todo</option>
+                            <option value="in-progress">In Progress</option>
+                            <option value="done">Done</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Priority</label>
+                        <select id="task-priority">
+                            <option value="medium">Medium</option>
+                            <option value="low">Low</option>
+                            <option value="high">High</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn" style="margin-top:0.25rem;">Add Task</button>
+            </form>
+        </div>
+
+        <!-- Task List -->
+        <div id="task-list" class="task-list">
+            <div class="empty-state">Loading tasks...</div>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div class="modal-overlay" id="edit-modal">
+        <div class="modal">
+            <h2>Edit Task</h2>
+            <input type="hidden" id="edit-id" />
+            <div class="form-group">
+                <label>Title</label>
+                <input type="text" id="edit-title" required />
+            </div>
+            <div class="form-group">
+                <label>Description</label>
+                <textarea id="edit-desc"></textarea>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <label>Status</label>
+                    <select id="edit-status">
+                        <option value="todo">Todo</option>
+                        <option value="in-progress">In Progress</option>
+                        <option value="done">Done</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Priority</label>
+                    <select id="edit-priority">
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+                <button class="btn-save" onclick="handleUpdate()">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/tasks.js"></script>
+</body>
+
+</html>
